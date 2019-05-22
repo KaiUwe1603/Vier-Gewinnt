@@ -2,7 +2,7 @@ package timeric.viergwinnt.ui;
 
 import javax.swing.JFrame;
 
-public class Starter {
+public final class Starter {
 
 	public static void main(String[] args) {
 		JFrame mainFrame = new JFrame("Vier Gewinnt");
@@ -10,6 +10,8 @@ public class Starter {
 		mainFrame.setSize(1200, 800);
 		mainFrame.setLocationByPlatform(true);
 		
+		StartController startController = new StartController();
+		mainFrame.setContentPane(startController.getViewComponent());
 		
 		mainFrame.setVisible(true);
 	}
