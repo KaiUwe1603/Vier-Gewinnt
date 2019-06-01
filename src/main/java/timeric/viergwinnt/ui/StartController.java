@@ -5,10 +5,16 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 
 import timeric.viergwinnt.data.Spielinfo;
@@ -71,7 +77,25 @@ public final class StartController {
 		rulesDialog.setSize(1000, 700);
 		rulesDialog.setLocationByPlatform(true);
 
+		JEditorPane textArea;
+		try {
+			textArea = new JEditorPane();
+			textArea.setEditable(false);
+			textArea.setContentType("text/html");
+			textArea.setText(loadRules());
+
+		} catch (IOException e) {
+			throw new IllegalStateException("Regeldatei fehlt", e);
+		}
+		rulesDialog.setContentPane(textArea);
+
 		rulesDialog.setVisible(true);
+	}
+
+	private String loadRules() throws IOException {
+		InputStream is = getClass().getClassLoader().getResourceAsStream("regeln.txt");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		return reader.lines().collect(Collectors.joining(System.lineSeparator()));
 	}
 
 }
