@@ -1,2 +1,44 @@
 
-<b>Das werden die Spielregeln!</b>
+<p>
+	<b>
+		<u>Vier Gewinnt Spielregeln:</u>
+	<b>
+</p>
+
+<br>
+
+<p>
+	<u>Vorbereitungen:</u>
+</p>
+
+<p>
+	In der Digitalen Version von Vier Gewinnt sind keine Vorbereitungen nötig.
+	<br>Es genügt lediglich ein Klick auf einen der oberen drei Buttons im Menü.
+</p>
+
+<br>
+
+<p>
+	<u>Lasset die Spiele beginnen:</u>
+</p>
+
+<p>
+	Haben Sie einen der Buttons angeklickt, so öffnet sich ein neues Fenster mit der Spieloberfläche. Spieler 1 kann nun 
+	direkt beginnen und seinen Spielstein (Chip) platzieren. Der aktuelle Spieler entscheidet sich für eine Spalte in 
+	welche er seinen Chip platzieren möchte und klickt den dazugehörigen Button an (z.B.: Spieler 1 entscheidet sich für 
+	Spalte 3, dann klickt er den Button 3 an). Daraufhin wird sein Chip im untersten freien Feld platziert, ist dies 
+	Geschehen, so ist der nächste Spieler an der Reihe.
+</p>
+
+<br>
+
+<p>
+	<u>Sieg- und Niederlagenbedingungen:</u>
+</p>
+
+<p>
+	ES wird solange gespielt bis es einem Spieler gelingt 4 seiner eigenen Chips in eine Reihe zu platzieren. Dabei spielt 
+	es keine Rolle ob diese "Linie" vertikal, horizontal oder diagonal verläuft, wichtig ist nur, dass sie nicht 
+	unterbrochen sein darf. Kann ein Spieler seinen Stein nicht mehr platzieren, da das Spielfeld bereits komplettt gefüllt 
+	ist, so haben beide Spieler verloren. s 
+</p>

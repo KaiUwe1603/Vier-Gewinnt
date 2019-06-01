@@ -32,16 +32,17 @@ public final class StartController {
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(20, 0, 20, 0);
 
-		centerPane.add(createButton("Einfaches Spiel", e -> openGameDialog(new Spielinfo(2, 5, 6), "Einfaches Spiel")),
+		centerPane.add(createButton("Einfaches Spiel", e -> openGameDialog(new Spielinfo(2, 6, 7), "Einfaches Spiel")),
 				gbc);
 
 		gbc.gridy = 1;
 		centerPane.add(
-				createButton("Großes Spielfeld", e -> openGameDialog(new Spielinfo(2, 8, 9), "Großes Spielfeld")), gbc);
+				createButton("Großes Spielfeld", e -> openGameDialog(new Spielinfo(2, 9, 10), "Großes Spielfeld")),
+				gbc);
 
 		gbc.gridy = 2;
 		centerPane.add(
-				createButton("3 Spieler (großes Spielfeld)", e -> openGameDialog(new Spielinfo(3, 8, 9), "3 Spieler")),
+				createButton("3 Spieler (großes Spielfeld)", e -> openGameDialog(new Spielinfo(3, 9, 10), "3 Spieler")),
 				gbc);
 
 		gbc.gridy = 3;
