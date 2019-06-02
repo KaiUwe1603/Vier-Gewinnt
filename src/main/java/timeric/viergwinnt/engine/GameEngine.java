@@ -110,7 +110,7 @@ public class GameEngine {
 			
 				int treffer = 0;
 				for(int spalte = 0; spalte < spielinfo.anzahlSpalten; spalte++) {
-					List<Chip> spaltenListe = spielStandMap.get(spalte);
+					List<Chip> spaltenListe = spielStandMap.get(zeile);
 					if (spaltenListe.size() <= zeile) {
 						break;
 					}
