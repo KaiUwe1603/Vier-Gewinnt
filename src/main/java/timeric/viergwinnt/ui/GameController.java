@@ -3,6 +3,7 @@ package timeric.viergwinnt.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -65,6 +66,14 @@ public class GameController {
 			anzeigeAktuellerSpieler.setText(gameEngine.getAktuellerSpieler().name);
 
 			viewComponent.add(createSpielFeld(), BorderLayout.CENTER);
+
+			JButton openRulesDialogButton = new JButton("Spielregeln");
+			openRulesDialogButton.addActionListener(e -> RulesDialog.openRulesDialog());
+
+			JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+			footerPanel.add(openRulesDialogButton);
+
+			viewComponent.add(footerPanel, BorderLayout.SOUTH);
 		}
 		return viewComponent;
 	}
@@ -105,6 +114,7 @@ public class GameController {
 
 		return spielFeldPanel;
 	}
+
 
 	private void setAddCoinButtons(JPanel spielFeldPanel, GridBagConstraints gbc) {
 		for (int i = 0; i < spielinfo.anzahlSpalten; i++) {
