@@ -62,7 +62,7 @@ public class GameController {
 
 			JPanel spielerAnzeigePanel = new JPanel();
 			spielerAnzeigePanel.add(new JLabel("Aktueller Spieler: "));
-			spielerAnzeigePanel.add(anzeigeAktuellerSpielerLabel);
+			spielerAnzeigePanel.add(anzeigeAktuellerSpielerLabel);// TODO Auto-generated method
 			viewComponent.add(spielerAnzeigePanel, BorderLayout.NORTH);
 			anzeigeAktuellerSpielerLabel.setText(gameEngine.getAktuellerSpieler().name);
 
@@ -100,7 +100,7 @@ public class GameController {
 			gbc.gridx = spalte;
 			gbc.gridy = currentY;
 
-			for (int zeile = spielinfo.anzahlZeilen - 1; zeile >= 0; zeile--) {
+			for (int zeile = spielinfo.anzahlZeilen - 1; zeile >= 0; zeile--) {// TODO Auto-generated method
 
 
 				JComponent spielZelle = new JPanel();
@@ -134,6 +134,7 @@ public class GameController {
 		}
 	}
 
+	// TODO Auto-generated method
 	private void addCoinAction(ActionEvent e) {
 		int zuSpielendeSpalte = spielControllerButtons.indexOf(e.getSource());
 		int chipInZeile = gameEngine.werfeChipEin(zuSpielendeSpalte);
@@ -151,9 +152,11 @@ public class GameController {
 	private void updateSpielFeld() {
 		switch (gameEngine.pruefeSpielStand()) {
 		case GEWONNEN:
+			spielEnde("Gewonnen hat Spieler: " + gameEngine.getAktuellerSpieler().name);
 				break;
 		
 		case ALLE_VERLOHREN:
+			spielEnde("Leider haben alle verloren");
 				break;
 
 		case NAECHSTER_SPIELER:
@@ -161,6 +164,12 @@ public class GameController {
 		
 		}
 		
+	}
+
+	private void spielEnde(String spielErgebnisMsg) {
+		ergebnisLabel.setText(spielErgebnisMsg);
+
+		spielControllerButtons.forEach(button -> button.setEnabled(false));
 	}
 
 }
