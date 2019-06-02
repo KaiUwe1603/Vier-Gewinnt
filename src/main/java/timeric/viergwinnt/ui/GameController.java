@@ -32,7 +32,8 @@ public class GameController {
 
 	private final List<JButton> spielControllerButtons;
 
-	private final JLabel anzeigeAktuellerSpieler = new JLabel();
+	private final JLabel anzeigeAktuellerSpielerLabel = new JLabel();
+	private final JLabel ergebnisLabel = new JLabel();
 
 	private JPanel viewComponent;
 
@@ -61,17 +62,21 @@ public class GameController {
 
 			JPanel spielerAnzeigePanel = new JPanel();
 			spielerAnzeigePanel.add(new JLabel("Aktueller Spieler: "));
-			spielerAnzeigePanel.add(anzeigeAktuellerSpieler);
+			spielerAnzeigePanel.add(anzeigeAktuellerSpielerLabel);
 			viewComponent.add(spielerAnzeigePanel, BorderLayout.NORTH);
-			anzeigeAktuellerSpieler.setText(gameEngine.getAktuellerSpieler().name);
+			anzeigeAktuellerSpielerLabel.setText(gameEngine.getAktuellerSpieler().name);
 
 			viewComponent.add(createSpielFeld(), BorderLayout.CENTER);
 
 			JButton openRulesDialogButton = new JButton("Spielregeln");
 			openRulesDialogButton.addActionListener(e -> RulesDialog.openRulesDialog());
 
-			JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-			footerPanel.add(openRulesDialogButton);
+			JPanel footerButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+			footerButtonPanel.add(openRulesDialogButton);
+
+			JPanel footerPanel = new JPanel(new BorderLayout());
+			footerPanel.add(footerButtonPanel, BorderLayout.EAST);
+			footerPanel.add(ergebnisLabel, BorderLayout.CENTER);
 
 			viewComponent.add(footerPanel, BorderLayout.SOUTH);
 		}
@@ -95,11 +100,10 @@ public class GameController {
 			gbc.gridx = spalte;
 			gbc.gridy = currentY;
 
-			for (int zeile = 0; zeile < spielinfo.anzahlZeilen; zeile++) {
+			for (int zeile = spielinfo.anzahlZeilen - 1; zeile >= 0; zeile--) {
 
 
 				JComponent spielZelle = new JPanel();
-				spielZelle.setMinimumSize(new Dimension(50, 50));
 				spielZelle.setBorder(BorderFactory.createLineBorder(Color.black));
 
 				spielFeldPanel.add(spielZelle, gbc);
@@ -121,6 +125,7 @@ public class GameController {
 			gbc.gridx = i;
 
 			JButton spielControllerButton = new JButton(Integer.valueOf(i + 1).toString());
+			spielControllerButton.setPreferredSize(new Dimension(50, 50));
 			spielControllerButton.addActionListener(this::addCoinAction);
 
 			spielControllerButtons.add(spielControllerButton);
@@ -135,6 +140,10 @@ public class GameController {
 
 		spielZellenMap.get(zuSpielendeSpalte)[chipInZeile].setBackground(gameEngine.getAktuellerSpieler().farbe);
 
+		if (chipInZeile >= spielinfo.anzahlZeilen - 1) {
+			((JButton) e.getSource()).setEnabled(false);
+		}
+
 		updateSpielFeld();
 
 	}
@@ -148,7 +157,7 @@ public class GameController {
 				break;
 
 		case NAECHSTER_SPIELER:
-				anzeigeAktuellerSpieler.setText(gameEngine.getAktuellerSpieler().name);
+			anzeigeAktuellerSpielerLabel.setText(gameEngine.getAktuellerSpieler().name);
 		
 		}
 		

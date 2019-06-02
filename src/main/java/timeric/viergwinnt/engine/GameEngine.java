@@ -1,7 +1,13 @@
 package timeric.viergwinnt.engine;
 
 import java.awt.Color;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
+import timeric.viergwinnt.data.Chip;
 import timeric.viergwinnt.data.Spieler;
 import timeric.viergwinnt.data.Spielinfo;
 
@@ -19,6 +25,8 @@ public class GameEngine {
 
 	private int aktuellerSpielerNum;
 
+	private final Map<Integer, List<Chip>> spielStandMap;
+
 	public GameEngine(Spielinfo spielinfo) {
 		this.spieler = new Spieler[spielinfo.anzahlSpieler];
 		for (int spielerNum = 0; spielerNum < spielinfo.anzahlSpieler; spielerNum++) {
@@ -26,7 +34,18 @@ public class GameEngine {
 		}
 		aktuellerSpielerNum = 0;
 		
+		this.spielStandMap = createSpielStandMap(spielinfo);
 		
+	}
+
+	private static Map<Integer, List<Chip>> createSpielStandMap(Spielinfo spielinfo) {
+		Map<Integer, List<Chip>> spielStandMap = new HashMap<>();
+
+		for (int spalte = 0; spalte < spielinfo.anzahlSpalten; spalte++) {
+			spielStandMap.put(Integer.valueOf(spalte), new LinkedList<Chip>());
+		}
+
+		return Collections.unmodifiableMap(spielStandMap);
 	}
 
 	public Spieler getAktuellerSpieler() {
@@ -34,8 +53,12 @@ public class GameEngine {
 	}
 
 	public int werfeChipEin(int zuSpielendeSpalte) {
-		// TODO Auto-generated method stub
-		return 0;
+		List<Chip> spalteMitChips = spielStandMap.get(Integer.valueOf(zuSpielendeSpalte));
+
+		int zeile = spalteMitChips.size();
+		spalteMitChips.add(new Chip(getAktuellerSpieler(), zuSpielendeSpalte, zeile));
+
+		return zeile;
 	}
 
 	public SpielStand pruefeSpielStand() {
