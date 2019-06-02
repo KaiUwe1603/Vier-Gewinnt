@@ -127,6 +127,7 @@ public class GameController {
 			JButton spielControllerButton = new JButton(Integer.valueOf(i + 1).toString());
 			spielControllerButton.setPreferredSize(new Dimension(50, 50));
 			spielControllerButton.addActionListener(this::addCoinAction);
+			spielControllerButton.setBackground(gameEngine.getAktuellerSpieler().farbe);
 
 			spielControllerButtons.add(spielControllerButton);
 			spielFeldPanel.add(spielControllerButton, gbc);
@@ -143,6 +144,7 @@ public class GameController {
 
 		if (chipInZeile >= spielinfo.anzahlZeilen - 1) {
 			((JButton) e.getSource()).setEnabled(false);
+			((JButton) e.getSource()).setBackground(Color.LIGHT_GRAY);
 		}
 
 		updateSpielFeld();
@@ -155,12 +157,14 @@ public class GameController {
 			spielEnde("Gewonnen hat Spieler: " + gameEngine.getAktuellerSpieler().name);
 				break;
 		
-		case ALLE_VERLOHREN:
+		case ALLE_VERLOREN:
 			spielEnde("Leider haben alle verloren");
 				break;
 
 		case NAECHSTER_SPIELER:
 			anzeigeAktuellerSpielerLabel.setText(gameEngine.getAktuellerSpieler().name);
+			spielControllerButtons.stream().filter(button -> button.isEnabled())
+					.forEach(button -> button.setBackground(gameEngine.getAktuellerSpieler().farbe));
 		
 		}
 		
