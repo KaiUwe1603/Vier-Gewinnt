@@ -40,5 +40,5 @@
 	ES wird solange gespielt bis es einem Spieler gelingt 4 seiner eigenen Chips in eine Reihe zu platzieren. Dabei spielt 
 	es keine Rolle ob diese "Linie" vertikal, horizontal oder diagonal verläuft, wichtig ist nur, dass sie nicht 
 	unterbrochen sein darf. Kann ein Spieler seinen Stein nicht mehr platzieren, da das Spielfeld bereits komplettt gefüllt 
-	ist, so haben beide Spieler verloren. s 
+	ist, so haben beide Spieler verloren. 
 </p>
