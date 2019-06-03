@@ -41,8 +41,10 @@ public final class StartController {
 
 		gbc.gridy = 3;
 		centerPane.add(createButton("Spielregeln", e -> RulesDialog.openRulesDialog()), gbc);
+		centerPane.setBackground(Starter.GAME_BACKGROUND);
 
 		viewComponent.add(centerPane, BorderLayout.CENTER);
+
 		return viewComponent;
 		
 	}

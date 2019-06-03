@@ -22,7 +22,7 @@ class SpielStandPrueferTest {
 	private static final Spieler TEST_SPIELER_1 = new Spieler("TEST_SPIELER_1", null);
 	private static final Spieler TEST_SPIELER_2 = new Spieler("TEST_SPIELER_2", null);
 
-	private static final Spielinfo TEST_SPIELINFO = new Spielinfo(2, 7, 6);
+	private static final Spielinfo TEST_SPIELINFO = new Spielinfo(2, 6, 7);
 
 	private SpielStandPruefer testObject;
 
@@ -42,7 +42,7 @@ class SpielStandPrueferTest {
 		spielStandMap.put(5, Collections.emptyList());
 		spielStandMap.put(6, Collections.emptyList());
 		
-		assertEquals(SpielStand.NAECHSTER_SPIELER, testObject.pruefe(spielStandMap, TEST_SPIELER_2));
+		assertEquals(SpielStand.NAECHSTER_SPIELER, testObject.pruefe(spielStandMap, TEST_SPIELER_1));
 	}
 
 	@Test
@@ -160,7 +160,7 @@ class SpielStandPrueferTest {
 			));
 		// @formatter:on
 		
-		assertEquals(SpielStand.GEWONNEN, testObject.pruefe(spielStandMap, TEST_SPIELER_1));
+		assertEquals(SpielStand.GEWONNEN, testObject.pruefe(spielStandMap, TEST_SPIELER_2));
 	}
 
 	@Test
@@ -177,28 +177,15 @@ class SpielStandPrueferTest {
 		
 		spielStandMap.put(1, Arrays.asList(
 				createChip(TEST_SPIELER_2),
+				createChip(TEST_SPIELER_2),
 				createChip(TEST_SPIELER_2)
 			));
 		
-		spielStandMap.put(2, Arrays.asList(
-				createChip(TEST_SPIELER_1)
-			));
-		
-		spielStandMap.put(3, Arrays.asList(
-				createChip(TEST_SPIELER_2)
-			));
-		
-		spielStandMap.put(4, Arrays.asList(
-				createChip(TEST_SPIELER_1)
-			));
-		
-		spielStandMap.put(5, Arrays.asList(
-				createChip(TEST_SPIELER_2)
-			));
-		
-		spielStandMap.put(6, Arrays.asList(
-				createChip(TEST_SPIELER_2)
-			));
+		spielStandMap.put(2, Collections.emptyList());
+		spielStandMap.put(3, Collections.emptyList());
+		spielStandMap.put(4, Collections.emptyList());
+		spielStandMap.put(5, Collections.emptyList());
+		spielStandMap.put(6, Collections.emptyList());
 		// @formatter:on
 
 		assertEquals(SpielStand.GEWONNEN, testObject.pruefe(spielStandMap, TEST_SPIELER_1));

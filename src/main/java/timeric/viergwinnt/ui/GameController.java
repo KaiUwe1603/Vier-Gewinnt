@@ -32,6 +32,8 @@ public class GameController {
 
 	private final List<JButton> spielControllerButtons;
 
+	private final JPanel spielerAnzeigePanel = new JPanel();
+	private final JPanel footerPanel = new JPanel(new BorderLayout());
 	private final JLabel anzeigeAktuellerSpielerLabel = new JLabel();
 	private final JLabel ergebnisLabel = new JLabel();
 
@@ -60,11 +62,15 @@ public class GameController {
 		if (viewComponent == null) {
 			viewComponent = new JPanel(new BorderLayout());
 
-			JPanel spielerAnzeigePanel = new JPanel();
+			spielerAnzeigePanel.setBackground(gameEngine.getAktuellerSpieler().farbe);
 			spielerAnzeigePanel.add(new JLabel("Aktueller Spieler: "));
 			spielerAnzeigePanel.add(anzeigeAktuellerSpielerLabel);// TODO Auto-generated method
 			viewComponent.add(spielerAnzeigePanel, BorderLayout.NORTH);
+
+			anzeigeAktuellerSpielerLabel.setFont(anzeigeAktuellerSpielerLabel.getFont().deriveFont(32f));
 			anzeigeAktuellerSpielerLabel.setText(gameEngine.getAktuellerSpieler().name);
+
+			ergebnisLabel.setFont(ergebnisLabel.getFont().deriveFont(32f));
 
 			viewComponent.add(createSpielFeld(), BorderLayout.CENTER);
 
@@ -74,9 +80,15 @@ public class GameController {
 			JPanel footerButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 			footerButtonPanel.add(openRulesDialogButton);
 
-			JPanel footerPanel = new JPanel(new BorderLayout());
+
 			footerPanel.add(footerButtonPanel, BorderLayout.EAST);
 			footerPanel.add(ergebnisLabel, BorderLayout.CENTER);
+			footerPanel.addPropertyChangeListener(evt -> {
+				if (evt.getPropertyName().equals("background")) {
+					footerButtonPanel.setBackground(footerPanel.getBackground());
+				}
+
+			});
 
 			viewComponent.add(footerPanel, BorderLayout.SOUTH);
 		}
@@ -116,6 +128,7 @@ public class GameController {
 
 		}
 
+		spielFeldPanel.setBackground(Starter.GAME_BACKGROUND);
 		return spielFeldPanel;
 	}
 
@@ -135,7 +148,6 @@ public class GameController {
 		}
 	}
 
-	// TODO Auto-generated method
 	private void addCoinAction(ActionEvent e) {
 		int zuSpielendeSpalte = spielControllerButtons.indexOf(e.getSource());
 		int chipInZeile = gameEngine.werfeChipEin(zuSpielendeSpalte);
@@ -154,7 +166,8 @@ public class GameController {
 	private void updateSpielFeld() {
 		switch (gameEngine.pruefeSpielStand()) {
 		case GEWONNEN:
-			spielEnde("Gewonnen hat Spieler: " + gameEngine.getAktuellerSpieler().name);
+			footerPanel.setBackground(gameEngine.getAktuellerSpieler().farbe);
+			spielEnde("Gewonnen hat: " + gameEngine.getAktuellerSpieler().name);
 				break;
 		
 		case ALLE_VERLOREN:
@@ -162,6 +175,7 @@ public class GameController {
 				break;
 
 		case NAECHSTER_SPIELER:
+			spielerAnzeigePanel.setBackground(gameEngine.getAktuellerSpieler().farbe);
 			anzeigeAktuellerSpielerLabel.setText(gameEngine.getAktuellerSpieler().name);
 			spielControllerButtons.stream().filter(button -> button.isEnabled())
 					.forEach(button -> button.setBackground(gameEngine.getAktuellerSpieler().farbe));

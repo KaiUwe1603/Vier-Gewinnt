@@ -102,7 +102,7 @@ public class GameEngine {
 
 		private boolean pruefeSpielVerloren(Map<Integer, List<Chip>> spielStandMap) {
 			return !spielStandMap.values().stream()
-					.filter(spaltenListe -> spaltenListe.size() < spielinfo.anzahlSpalten).findAny().isPresent();
+					.filter(spaltenListe -> spaltenListe.size() < spielinfo.anzahlZeilen).findAny().isPresent();
 		}
 
 		private boolean pruefeHorizontal(Map<Integer, List<Chip>> spielStandMap, Spieler spielerZuPruefen) {
@@ -110,7 +110,7 @@ public class GameEngine {
 			
 				int treffer = 0;
 				for(int spalte = 0; spalte < spielinfo.anzahlSpalten; spalte++) {
-					List<Chip> spaltenListe = spielStandMap.get(zeile);
+					List<Chip> spaltenListe = spielStandMap.get(spalte);
 					if (spaltenListe.size() <= zeile) {
 						break;
 					}
